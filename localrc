@@ -1,0 +1,49 @@
+DEST=/opt/stack                                                                                                                                              
+                                                                                                                                                             
+# Logging
+LOGFILE=$DEST/logs/stack.sh.log
+VERBOSE=True
+#OFFLINE=True
+LOG_COLOR=False
+SCREEN_LOGDIR=$DEST/logs/screen
+
+# Credentials
+ADMIN_PASSWORD=openstack
+MYSQL_PASSWORD=openstack
+RABBIT_PASSWORD=openstack
+SERVICE_PASSWORD=openstack
+SERVICE_TOKEN=tokentoken
+
+# Github's Branch
+GLANCE_BRANCH=stable/icehouse
+HORIZON_BRANCH=stable/icehouse
+KEYSTONE_BRANCH=stable/icehouse
+NOVA_BRANCH=stable/icehouse
+NEUTRON_BRANCH=stable/icehouse
+HEAT_BRANCH=stable/icehouse
+CEILOMETER_BRANCH=stable/icehouse
+
+# HOST
+#EDITME
+#HOST_IP=192.168.56.109
+
+#Services
+disable_service n-net
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service q-l3
+enable_service q-meta
+enable_service neutron
+
+# Heat - Orchestration Service
+ENABLED_SERVICES+=,heat,h-api,h-api-cfn,h-api-cw,h-eng
+HEAT_STANDALONE=True
+
+# Ceilometer - Metering Service (metering + alarming)
+ENABLED_SERVICES+=,ceilometer-acompute,ceilometer-acentral,ceilometer-collector,ceilometer-api
+ENABLED_SERVICES+=,ceilometer-alarm-notify,ceilometer-alarm-eval
+
+#Scheduler
+SCHEDULER=nova.scheduler.chance.ChanceScheduler
+
